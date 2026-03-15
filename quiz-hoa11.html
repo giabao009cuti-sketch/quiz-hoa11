@@ -1,0 +1,160 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quiz Hóa 11</title>
+
+<style>
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.box{
+background:#1e293b;
+padding:25px;
+margin:60px auto;
+width:520px;
+border-radius:12px;
+}
+
+button{
+display:block;
+width:100%;
+margin:10px 0;
+padding:12px;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#334155;
+color:white;
+}
+
+#next{
+background:#22c55e;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>🎮 Quiz Ôn Thi Hóa 11</h2>
+
+<h3 id="question"></h3>
+
+<div id="answers"></div>
+
+<p id="result"></p>
+
+<button id="next" onclick="next()">Câu tiếp</button>
+
+<h3 id="score"></h3>
+
+</div>
+
+<script>
+
+let quiz=[
+
+{
+q:"C5H12 có bao nhiêu đồng phân?",
+a:["1","2","3","4"],
+correct:2,
+explain:"C5H12 có 3 đồng phân: n-pentane, isopentane, neopentane."
+},
+
+{
+q:"Công thức chung của Alkene là gì?",
+a:["CnH2n","CnH2n+2","CnH2n-2","CnH2n+1"],
+correct:0,
+explain:"Alkene có 1 liên kết đôi nên CT chung là CnH2n."
+},
+
+{
+q:"But-1-ene + HCl tạo sản phẩm chính?",
+a:["1-chlorobutane","2-chlorobutane","butane","butanol"],
+correct:1,
+explain:"Theo quy tắc Markovnikov → tạo 2-chlorobutane."
+},
+
+{
+q:"Toluene có CTPT?",
+a:["C6H6","C7H8","C8H8","C7H6"],
+correct:1,
+explain:"Toluene = benzene + CH3 → C7H8."
+},
+
+{
+q:"Alkene có loại đồng phân nào mà alkyne không có?",
+a:["mạch carbon","vị trí liên kết","hình học","nhóm chức"],
+correct:2,
+explain:"Alkene có đồng phân hình học cis-trans."
+}
+
+]
+
+let i=0
+let score=0
+
+function load(){
+
+let q=quiz[i]
+
+document.getElementById("question").innerText="Câu "+(i+1)+": "+q.q
+
+let html=""
+
+q.a.forEach((ans,index)=>{
+html+=`<button onclick="check(${index})">${ans}</button>`
+})
+
+document.getElementById("answers").innerHTML=html
+document.getElementById("result").innerHTML=""
+}
+
+function check(x){
+
+let q=quiz[i]
+
+if(x==q.correct){
+score++
+document.getElementById("result").innerHTML="✅ Đúng!<br>"+q.explain
+}
+else{
+document.getElementById("result").innerHTML="❌ Sai! Đáp án đúng: "+q.a[q.correct]+"<br>"+q.explain
+}
+
+}
+
+function next(){
+
+i++
+
+if(i<quiz.length){
+load()
+}
+else{
+document.getElementById("question").innerText="Hoàn thành!"
+document.getElementById("answers").innerHTML=""
+document.getElementById("score").innerText="Điểm: "+score+"/"+quiz.length
+}
+
+}
+
+load()
+
+</script>
+
+</body>
+</html>
+```
